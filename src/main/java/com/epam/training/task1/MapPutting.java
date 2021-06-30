@@ -11,7 +11,7 @@ public class MapPutting {
         this.map = map;
     }
 
-    public void putToMap(int key, int value) {
+    public synchronized void putToMap(int key, int value) {
         map.put(key, value);
     }
 }
