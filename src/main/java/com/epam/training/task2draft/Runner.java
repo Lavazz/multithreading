@@ -1,4 +1,4 @@
-package com.epam.training.task2;
+package com.epam.training.task2draft;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +9,8 @@ public class Runner {
         List<Integer> list = new ArrayList<>();
 
         WritingNumber writingNumber = new WritingNumber(list);
-        Calculation calculation = new Calculation(list);
-        Printing summing = new Printing(list, "sum", calculation);
-        Printing squareRoot = new Printing(list, "squareRoot", calculation);
+        CalculationSquareRoot squareRoot = new CalculationSquareRoot(list);
+        Summing summing = new Summing(list);
 
         Thread writingThread = new Thread(writingNumber);
         Thread summingThread = new Thread(summing);
