@@ -8,14 +8,13 @@ import java.util.List;
 import static java.lang.Math.sqrt;
 
 public class Calculation  {
-    private static final Logger LOGGER = LoggerFactory.getLogger(Calculation.class);
+
     public static final int POW = 2;
-    private List<Integer> list;
+    private final List<Integer> list;
 
     public Calculation(List<Integer> list) {
         this.list = list;
     }
-
 
     protected int sum() {
         synchronized (list) {
@@ -26,7 +25,6 @@ public class Calculation  {
             return sum;
         }
     }
-
 
     protected int calculateSquareRoot() {
         synchronized (list) {

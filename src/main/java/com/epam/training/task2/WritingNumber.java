@@ -9,7 +9,7 @@ import static java.lang.Math.random;
 
 public class WritingNumber implements Runnable {
 
-    private List<Integer> list;
+    private final List<Integer> list;
     private static final Logger LOGGER = LoggerFactory.getLogger(Calculation.class);
 
     public WritingNumber(List<Integer> list) {
@@ -21,7 +21,6 @@ public class WritingNumber implements Runnable {
         for (int i = 0; i < 20; i++) {
             writeList();
         }
-        System.out.println(list);
     }
 
     private void writeList() {
@@ -31,8 +30,9 @@ public class WritingNumber implements Runnable {
             list.add(randomNumber);
             LOGGER.info("random number=" + randomNumber);
             try {
-               list.wait();
+                list.wait();
             } catch (InterruptedException e) {
+                LOGGER.error("interrupt");
             }
         }
     }

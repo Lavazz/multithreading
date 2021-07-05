@@ -11,23 +11,25 @@ import java.util.Map;
 public class MapValueCounter implements Runnable {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MapValueCounter.class);
-    private Map<Integer, Integer> map;
+    private final int threadQuantity;
+    private final Map<Integer, Integer> map;
     List<Integer> sumList = Collections.synchronizedList(new ArrayList<>());
 
-    protected MapValueCounter(Map<Integer, Integer> map) {
+    protected MapValueCounter(Map<Integer, Integer> map, int threadQuantity) {
         this.map = map;
+        this.threadQuantity = threadQuantity;
     }
 
     @Override
     public void run() {
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < threadQuantity; i++) {
             mapSum();
         }
     }
 
     private void mapSum() {
         synchronized (map) {
-            //    if (map.size() > sumList.size()+1) {
+
             map.notify();
 
             int sum = map.values()
@@ -40,9 +42,12 @@ public class MapValueCounter implements Runnable {
             try {
                 map.wait();
             } catch (InterruptedException e) {
+                LOGGER.error("interrupt");
             }
-            //  }
+            if (map.size() == threadQuantity) {
+                Thread.currentThread().interrupt();
+            }
         }
     }
-}
 
+}

@@ -7,9 +7,12 @@ import java.util.List;
 
 public class Printing implements Runnable {
 
-    private List<Integer> list;
-    private String operation;
-    private Calculation calculation;
+    public static final String SUM = "sum";
+    public static final String SQUARE_ROOT = "squareRoot";
+    public static final String UNKNOWEN_OPERATION = "result=-1";
+    private final List<Integer> list;
+    private final String operation;
+    private final Calculation calculation;
     private static final Logger LOGGER = LoggerFactory.getLogger(Printing.class);
 
     public Printing(List<Integer> list, String operation, Calculation calculation) {
@@ -29,16 +32,17 @@ public class Printing implements Runnable {
     private void print(String operation) {
         synchronized (list) {
             list.notify();
-            if (operation.equalsIgnoreCase("sum")) {
+            if (operation.equalsIgnoreCase(SUM)) {
                 LOGGER.info("sum=" + calculation.sum());
-            } else if (operation.equalsIgnoreCase("squareRoot")) {
+            } else if (operation.equalsIgnoreCase(SQUARE_ROOT)) {
                 LOGGER.info("squareRoot=" + calculation.calculateSquareRoot());
             } else {
-                LOGGER.info("result=-1");
+                LOGGER.info(UNKNOWEN_OPERATION);
             }
             try {
                 list.wait();
             } catch (InterruptedException e) {
+                LOGGER.error("interrupt");
             }
         }
     }
