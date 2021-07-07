@@ -14,7 +14,7 @@ public class ExchangingOperation {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ExchangeService.class);
 
-    public static BigDecimal sellCurrency(BigDecimal money, Currency currency) {
+    public static BigDecimal buyCurrency(BigDecimal money, Currency currency) {
         BigDecimal rate = RateService.getExchangeRate(currency);
         if (money.compareTo(rate) < 0) {
             LOGGER.error("Minimum sum of money should by mo than rate");
@@ -23,9 +23,13 @@ public class ExchangingOperation {
         return money.divide(rate, 2, RoundingMode.HALF_UP);
     }
 
-    public static BigDecimal buyCurrency(BigDecimal money, Currency currency) {
-        BigDecimal rateService = RateService.getExchangeRate(currency);
-        BigDecimal rate = new BigDecimal(rateService.toString());
+    public static BigDecimal sellCurrency(BigDecimal money, Currency currency) {
+        BigDecimal rate = RateService.getExchangeRate(currency);
+        if (money.compareTo(rate) < 0) {
+            LOGGER.error("Minimum sum of money should by mo than rate");
+            throw new LittleCashException("Minimum sum of money should by mo than rate");
+        }
+
         return money.multiply(rate);
     }
 }

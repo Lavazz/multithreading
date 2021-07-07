@@ -24,9 +24,9 @@ public class App {
         User userArtem = new User("Artem", "Ivanov");
         User userVitaly = new User("Vitaly", "Balnikov");
 
-        BigDecimal moneyAnna = new BigDecimal("2");
-        BigDecimal moneyArtem = new BigDecimal("8.4");
-        BigDecimal moneyVitaly = new BigDecimal("10");
+        BigDecimal moneyAnna = new BigDecimal("20");
+        BigDecimal moneyArtem = new BigDecimal("1");
+        BigDecimal moneyVitaly = new BigDecimal("100");
 
         ExchangeService exchangeService1 = new ExchangeService(userAnna, Currency.EUR, moneyAnna, path);
         ExchangeService exchangeService2 = new ExchangeService(userArtem, Currency.USD, moneyArtem, path);
