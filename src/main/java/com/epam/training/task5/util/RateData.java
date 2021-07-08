@@ -1,10 +1,10 @@
-package com.epam.training.task5.service;
+package com.epam.training.task5.util;
 
 import com.epam.training.task5.model.Currency;
 
 import java.math.BigDecimal;
 
-public class RateService {
+public class RateData {
 
     public static BigDecimal getExchangeRate(Currency currency) {
         switch (currency) {

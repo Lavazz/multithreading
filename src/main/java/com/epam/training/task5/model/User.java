@@ -1,5 +1,8 @@
 package com.epam.training.task5.model;
 
+import lombok.Data;
+
+@Data
 public class User {
 
    private String firstName;
@@ -10,22 +13,4 @@ public class User {
       this.lastName = lastName;
    }
 
-   public User() {
-   }
-
-   public String getFirstName() {
-      return firstName;
-   }
-
-   public void setFirstName(String firstName) {
-      this.firstName = firstName;
-   }
-
-   public String getLastName() {
-      return lastName;
-   }
-
-   public void setLastName(String lastName) {
-      this.lastName = lastName;
-   }
 }

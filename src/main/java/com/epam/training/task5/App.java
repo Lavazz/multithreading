@@ -3,6 +3,7 @@ package com.epam.training.task5;
 import com.epam.training.task5.model.Currency;
 import com.epam.training.task5.model.User;
 import com.epam.training.task5.service.ExchangeService;
+import com.epam.training.task5.service.ExchangeServiceImpl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -28,9 +29,9 @@ public class App {
         BigDecimal moneyArtem = new BigDecimal("1");
         BigDecimal moneyVitaly = new BigDecimal("100");
 
-        ExchangeService exchangeService1 = new ExchangeService(userAnna, Currency.EUR, moneyAnna, path);
-        ExchangeService exchangeService2 = new ExchangeService(userArtem, Currency.USD, moneyArtem, path);
-        ExchangeService exchangeService3 = new ExchangeService(userVitaly, Currency.RUB, moneyVitaly, path);
+        ExchangeService exchangeService1 = new ExchangeServiceImpl(userAnna, Currency.EUR, moneyAnna, path);
+        ExchangeService exchangeService2 = new ExchangeServiceImpl(userArtem, Currency.USD, moneyArtem, path);
+        ExchangeService exchangeService3 = new ExchangeServiceImpl(userVitaly, Currency.RUB, moneyVitaly, path);
 
 
         List<ExchangeService> exchangers = new ArrayList<>();
