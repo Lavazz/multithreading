@@ -3,7 +3,7 @@ package com.epam.training.task1;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class Runner1 {
+public class RunnerFirstTask {
 
     public static void main(String[] args) {
 

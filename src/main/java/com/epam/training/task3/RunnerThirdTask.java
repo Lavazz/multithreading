@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class RunnerTask3 {
+public class RunnerThirdTask {
     public static void main(String[] args){
 
         LinkedList<String> buffer = new LinkedList<>();

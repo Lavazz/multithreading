@@ -3,7 +3,7 @@ package com.epam.training.task2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Runner2 {
+public class RunnerSecondTask {
 
     public static void main(String[] args) {
         List<Integer> list = new ArrayList<>();
