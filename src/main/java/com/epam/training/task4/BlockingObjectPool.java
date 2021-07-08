@@ -27,16 +27,16 @@ public class BlockingObjectPool {
         readLock.lock();
         Object result = null;
         try {
-            if (isNotEmpty()) {
+            if (!pool.isEmpty()) {
                 int index = pool.size() - 1;
                 result = pool.get(index);
                 pool.remove(index);
             }
         } finally {
-            if (isNotFull()) {
+            if (pool.size() < size) {
                 writeLock.unlock();
             }
-            if (isNotEmpty()) {
+            if (!pool.isEmpty()) {
                 readLock.unlock();
             }
         }
@@ -46,24 +46,17 @@ public class BlockingObjectPool {
     public void take(Object object) {
         writeLock.lock();
         try {
-            if (isNotFull()) {
+            if (pool.size() < size) {
                 pool.add(object);
             }
         } finally {
-            if (isNotFull()) {
+            if (pool.size() < size) {
                 writeLock.unlock();
             }
-            if (isNotEmpty()) {
+            if (!pool.isEmpty()) {
                 readLock.unlock();
             }
         }
     }
 
-    private boolean isNotEmpty() {
-        return !pool.isEmpty();
-    }
-
-    private boolean isNotFull() {
-        return pool.size() < size;
-    }
 }
