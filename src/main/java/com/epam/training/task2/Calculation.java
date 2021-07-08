@@ -1,13 +1,10 @@
 package com.epam.training.task2;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 import static java.lang.Math.sqrt;
 
-public class Calculation  {
+public class Calculation {
 
     public static final int POW = 2;
     private final List<Integer> list;

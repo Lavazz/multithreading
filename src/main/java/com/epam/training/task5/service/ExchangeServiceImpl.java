@@ -10,10 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.math.BigDecimal;
-import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadLocalRandom;
 
-public class ExchangeServiceImpl implements ExchangeService{
+public class ExchangeServiceImpl implements ExchangeService {
 
     private final ExchangeDao exchangeDao;
     private final User user;
@@ -30,15 +29,15 @@ public class ExchangeServiceImpl implements ExchangeService{
     }
 
     @Override
-    public String call()  {
+    public String call() {
         boolean canBuy = ThreadLocalRandom.current().nextBoolean();
         BigDecimal exchangeMoney;
         if (canBuy) {
             exchangeMoney = ExchangingOperation.buyCurrency(money, currency);
-            LOGGER.info("{} buy {} {}" ,user.getFirstName(), exchangeMoney, currency);
+            LOGGER.info("{} buy {} {}", user.getFirstName(), exchangeMoney, currency);
         } else {
             exchangeMoney = ExchangingOperation.sellCurrency(money, currency);
-            LOGGER.info("{} sell {} {}" ,user.getFirstName(), money, currency);
+            LOGGER.info("{} sell {} {}", user.getFirstName(), money, currency);
         }
         Account account = new Account(user, currency, exchangeMoney);
         exchangeDao.saveAccount(account);

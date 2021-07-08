@@ -1,23 +1,21 @@
 package com.epam.training.task4;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.apache.commons.collections4.CollectionUtils;
-
 public class BlockingObjectPool {
 
-    private final int size;
     private final List<Object> pool;
 
     private final Lock readLock;
     private final Lock writeLock;
 
     public BlockingObjectPool(int size) {
-        this.size = size;
         pool = new ArrayList<>(size);
 
         ReadWriteLock lock = new ReentrantReadWriteLock();
