@@ -6,6 +6,8 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReadWriteLock;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 public class BlockingObjectPool {
 
     private final int size;
@@ -27,16 +29,16 @@ public class BlockingObjectPool {
         readLock.lock();
         Object result = null;
         try {
-            if (!pool.isEmpty()) {
+            if (CollectionUtils.isNotEmpty(pool)) {
                 int index = pool.size() - 1;
                 result = pool.get(index);
                 pool.remove(index);
             }
         } finally {
-            if (pool.size() < size) {
+            if (!CollectionUtils.isFull(pool)) {
                 writeLock.unlock();
             }
-            if (!pool.isEmpty()) {
+            if (CollectionUtils.isNotEmpty(pool)) {
                 readLock.unlock();
             }
         }
@@ -46,14 +48,14 @@ public class BlockingObjectPool {
     public void take(Object object) {
         writeLock.lock();
         try {
-            if (pool.size() < size) {
+            if (!CollectionUtils.isFull(pool)) {
                 pool.add(object);
             }
         } finally {
-            if (pool.size() < size) {
+            if (!CollectionUtils.isFull(pool)) {
                 writeLock.unlock();
             }
-            if (!pool.isEmpty()) {
+            if (CollectionUtils.isNotEmpty(pool)) {
                 readLock.unlock();
             }
         }
